@@ -4,7 +4,7 @@ class Page1 extends Component{
   render(){
     return(                 
       <div className="testColor">
-        这个是 1111111111111
+        这个是一一一一一一一一
       </div>  		
     );
   }
