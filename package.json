@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --progress --inline --config config/webpack.dev.js",
+    "start": "webpack-dev-server --progress --inline --config config/webpack2.dev.js",
     "build": "webpack --color --progress --config config/webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,6 +23,7 @@
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "bundle-loader": "^0.5.5",
     "css-loader": "^0.28.4",
     "eslint": "^4.4.1",
     "eslint-loader": "^1.9.0",

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router";
 
-export default class App extends Component{
+class App extends Component{
   render(){
     return(                 
       <div className="testColor">
@@ -19,3 +19,6 @@ export default class App extends Component{
     );
   }
 }
+
+//export default App;
+module.exports = App;

@@ -4,7 +4,7 @@ import "../../style.less";
 import myHelloStore from "./hellowStore";
 
 @observer
-export default class HelloWorld extends Component{
+class HelloWorld extends Component{
   render(){
     return(                 
       <div className="testColor">
@@ -16,3 +16,6 @@ export default class HelloWorld extends Component{
     );
   }
 }
+
+//export default HelloWorld;
+module.exports = HelloWorld;

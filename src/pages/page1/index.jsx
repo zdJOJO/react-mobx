@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export default class Page1 extends Component{
+class Page1 extends Component{
   render(){
     return(                 
       <div className="testColor">
@@ -9,3 +9,6 @@ export default class Page1 extends Component{
     );
   }
 }
+
+//export default Page1;
+module.exports = Page1;
