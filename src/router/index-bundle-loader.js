@@ -2,7 +2,7 @@
 webpack(bundle-loader) + react-router 实现组件的动态加载
 */
 
-import HelloWorld from "../pages/HelloWorld";
+import HelloWorld from "../pages/helloWorld";
   
 const lazyLoadComponent = (pageName) => (location, callback) => {
   let pageBundle = require("bundle-loader?lazy!../pages/" + pageName);
@@ -12,16 +12,16 @@ const lazyLoadComponent = (pageName) => (location, callback) => {
 const routeConfig = [
   {
     path: "/",
-    getComponent: lazyLoadComponent("App"),
+    getComponent: lazyLoadComponent("app"),
     indexRoute: {component: HelloWorld},
     childRoutes: [
       { 
         path: "page1", 
-        getComponent: lazyLoadComponent("Page1")
+        getComponent: lazyLoadComponent("page1")
       },
       { 
         path: "page2", 
-        getComponent: lazyLoadComponent("Page2")
+        getComponent: lazyLoadComponent("page2")
       }
     ]
   }
