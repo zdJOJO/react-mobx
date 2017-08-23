@@ -17,7 +17,13 @@ const routeConfig = [
     childRoutes: [
       { 
         path: "page1", 
-        getComponent: lazyLoadComponent("page1")
+        getComponent: lazyLoadComponent("page1"),
+        childRoutes: [
+          {
+            path: "user/:userId", 
+            getComponent: lazyLoadComponent("user")
+          }
+        ]
       },
       { 
         path: "page2", 

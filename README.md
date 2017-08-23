@@ -15,3 +15,11 @@
 
   2.在使用方案二时，模块的导出需要使用 module.exports 不能使用ES6的 default export
 
+# 问题：
+ 方案一打包结果：
+![image](https://github.com/zdJOJO/react-mobx/static/img/1.jpg)
+
+方案二打包结果：
+![image](https://github.com/zdJOJO/react-mobx/static/img/2.jpg)
+
+为什么 方案二会多出这么多文件，比方案一大很多，是重复压缩吗？

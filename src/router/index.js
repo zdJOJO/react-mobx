@@ -4,23 +4,32 @@
 
 import App from "../pages/app";
 import HelloWorld from "../pages/helloWorld";
+import User from "../pages/page1/user";
   
 // 问题: 如何 使用 Redirect
 const routeConfig = [
   {
     path: "/",
     component: App,
-    indexRoute: {component: HelloWorld},
+    indexRoute: {
+      component: HelloWorld
+    },
     childRoutes: [
       { 
         path: "page1", 
-        getComponents: (location, callback) => require.ensure([], require => {
+        getComponent: (location, callback) => require.ensure([], require => {
           callback(null, require("../pages/page1/index"));
-        }, "page1")
+        }, "page1"),
+        childRoutes: [
+          {
+            path: "user/:userId",
+            component: User
+          }
+        ]
       },
       { 
         path: "page2", 
-        getComponents: (location, callback) => require.ensure([], require => {
+        getComponent: (location, callback) => require.ensure([], require => {
           callback(null, require("../pages/page2/index"));
         }, "page2")
       },
