@@ -8,7 +8,7 @@ class HelloWorld extends Component{
   render(){
     return(                 
       <div className="testColor">
-        hellow world !!!!
+        WelCome!!   hellow world !!!!
         <div className="inside">
           {myHelloStore.timer}
         </div>

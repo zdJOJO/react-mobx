@@ -3,8 +3,7 @@ import { render } from "react-dom";
 import { Router, hashHistory} from "react-router";
 
 //import routeConfig from "./router/index";
-import routeConfig from "./router/index2";
-
+import routeConfig from "./router/index-bundle-loader";
 
 render(
   <Router 

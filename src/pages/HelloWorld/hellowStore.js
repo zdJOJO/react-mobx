@@ -1,8 +1,8 @@
 import {observable, action} from "mobx";
 
-class HelloWorlStore {
+class HelloWorldStore {
   @observable timer = "mobxmobxmobxmobxmobx"
 }
 
-const myHelloStore = new HelloWorlStore();
+const myHelloStore = new HelloWorldStore();
 export default myHelloStore;

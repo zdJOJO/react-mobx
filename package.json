@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --progress --inline --config config/webpack2.dev.js",
+    "start": "webpack-dev-server --progress --inline --config config/webpack.dev.js",
+    "start-bunlde-loader": "webpack-dev-server --progress --inline --config config/webpack.dev-bundle-loader.js",
     "build": "webpack --color --progress --config config/webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

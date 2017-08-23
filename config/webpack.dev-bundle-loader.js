@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 
-let port = 3002; 
+let port = 3003; 
 
 module.exports = {
 
@@ -10,7 +10,7 @@ module.exports = {
   entry: [
     `webpack-dev-server/client?http://localhost:${port}`,
     'webpack/hot/only-dev-server',
-    './src/index.jsx'
+    './src/index-bundle-loader.jsx'
   ],
 
   output: {
@@ -37,11 +37,6 @@ module.exports = {
             },
             include: path.resolve(__dirname, '../src'),  //需要绝对路径
             exclude: /node_modules/   // 告诉Babel不要处理node_modules文件夹中的文件
-        },
-        {
-          test: /src\\pages(\\.*).(jsx)/,
-          include: path.resolve(__dirname, '../src'),
-          use: ['bundle-loader?lazy', 'babel-loader']
         },
         {
           test: /\.js[x]?$/,  // ==> 正则匹配 .js .jsx
