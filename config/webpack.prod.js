@@ -27,11 +27,11 @@ module.exports = {
         {
             test: /\.js[x]?$/,  // ==> 正则匹配 .js .jsx
             use: {
-              loader: "babel-loader",
-              options: {
-                presets: ['react', 'es2015', 'stage-1'],
-                plugins: ['transform-decorators-legacy']
-              }
+              loader: "babel-loader"
+              // options: {
+              //   presets: ['react', 'es2015', 'stage-1'],
+              //   plugins: ['transform-decorators-legacy']
+              // }
             },
             include: path.resolve(__dirname, '../src'),  //需要绝对路径
             exclude: /node_modules/   // 告诉Babel不要处理node_modules文件夹中的文件

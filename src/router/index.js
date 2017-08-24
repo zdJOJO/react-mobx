@@ -13,6 +13,9 @@ const routeConfig = [
     component: App,
     indexRoute: {
       component: HelloWorld
+      // getComponent: (location, callback) => require.ensure([], require => {
+      //   callback(null, require("../pages/helloWorld/index"));
+      // }, "helloWorld")
     },
     childRoutes: [
       { 
@@ -24,6 +27,9 @@ const routeConfig = [
           {
             path: "user/:userId",
             component: User
+            // getComponent: (location, callback) => require.ensure([], require => {
+            //   callback(null, require("../pages/page1/user"));
+            // }, "user")
           }
         ]
       },
