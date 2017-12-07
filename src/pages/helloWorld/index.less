@@ -1,0 +1,54 @@
+
+.container{
+  width: 60%;
+  padding: 10px;
+  margin: 15px auto;
+
+  .studentList{
+    ul{
+      padding: 0;
+    }
+    .studentItem {
+      list-style: none;
+      border-bottom: 1px #000 solid;
+      padding: 10px; 
+    }
+  
+    .studentFade-enter {
+      opacity: 0.01;
+    }
+    
+    .studentFade-enter.studentFade-enter-active {
+      transition: all 800ms ease-in;
+      opacity: 1;
+      
+    }
+    
+    .studentFade-exit {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .studentFade-exit.studentFade-exit-active {
+      transition: all 600ms ease-in;
+      opacity: 0.01;
+      transform: translateX(-100%);
+    }
+  
+  }
+}
+
+
+.tabs{
+  width: 100%;
+  display: flex;
+
+  .itemTab{
+    padding: 5px 10px;  
+  }
+}
+
+
+
+/******************************/ 
+
