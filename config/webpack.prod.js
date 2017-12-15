@@ -60,7 +60,7 @@ module.exports = {
   plugins: [
 
     new HtmlWebpackPlugin({
-      title: "我的APP",
+      title: "我的APP"
     }),
 
     new ExtractTextPlugin("style.css"),
