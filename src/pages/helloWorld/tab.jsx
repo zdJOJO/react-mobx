@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {observer} from "mobx-react";
+import {observer, inject} from "mobx-react";
 import { Transition } from "react-transition-group";
 
 const duration = 300;
@@ -35,7 +35,7 @@ export const Tab = observer(
                   flex: 1/props.tabs.length,
                   ...transitionStyles[state]
                 }} 
-                onClick={()=>{props.handleSelectTab(index)}}
+                onClick={()=>{props.helloAction.handleSelectTab(index)}}
               >
                 {tab}
               </div>

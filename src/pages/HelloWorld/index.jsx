@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Transition, CSSTransition, TransitionGroup} from "react-transition-group";
-import {observer} from "mobx-react";
+import { observer, inject } from "mobx-react";
 import "../../style.less";
 import "./index.less";
 import {Tab} from "./tab";
-import myHelloStore from "./hellowStore";
+// import hello from "./hellowStore";
+
 
 const duration = 1000;
 
@@ -49,7 +50,7 @@ const StudentTrans = ({ children, ...props}) => (
 );
 
 
-@observer
+@inject("hello", "actions") @observer
 class HelloWorld extends Component{
 
   state = {
@@ -57,20 +58,17 @@ class HelloWorld extends Component{
   }
 
   render(){
-    return(                 
+    const { hello, actions } = this.props;
+    return(
       <div className="testColor">
         WelCome!!   hellow world !!!!
         <div className="inside">
-          {myHelloStore.timer}
+          {hello.timer}
         </div>
 
-        <Tab
-          tabs={["one", "two", "three"]}
-          activeKey={myHelloStore.activeKey}
-          handleSelectTab={myHelloStore.handleSelectTab}
-        />
+        <Tab {...hello} {...actions} />
 
-        { myHelloStore.activeKey === 0 &&
+        { hello.activeKey === 0 &&
           <div className="container">
             <button onClick={()=>{this.setState({show:!this.state.show})}}>Click</button>
             <FadeOne in={this.state.show}
@@ -78,32 +76,28 @@ class HelloWorld extends Component{
           </div>
         }
 
-        { myHelloStore.activeKey === 1 &&
+        { hello.activeKey === 1 &&
           <div className="container">
             <div className="studentList">
               <TransitionGroup 
                 component="ul"
               >
                 {
-                  myHelloStore.students.map((student, index) => (
+                  hello.students.map((student, index) => (
                     <StudentTrans key={student.id}>
                       <li className="studentItem">
                         <span>name: {student.name}, age: {student.age}</span>
-                        <button onClick={()=>{myHelloStore.handleRemove(index)}}>X</button>
+                        <button onClick={()=>{actions.helloAction.handleRemove(index)}}>X</button>
                       </li>
                     </StudentTrans>
                   ))
                 }
               </TransitionGroup>
             </div> 
-            <input type="text" onChange={myHelloStore.handleChange}/>
-            <button onClick={myHelloStore.handleAdd}>增加</button>
+            <input type="text" onChange={actions.helloAction.handleChange}/>
+            <button onClick={actions.helloAction.handleAdd}>增加</button>
           </div>
         }
-
-
-        
-      
       </div>  		
     );
   }
