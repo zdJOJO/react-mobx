@@ -6,14 +6,14 @@ export default class HelloAction {
   }
 
   @action handleRemove= index =>{
-    let tem = this.state.hello.students.slice();
+    let tem = this.state.students.slice();
     tem.splice(index, 1);
-    this.state.hello.students = tem;
+    this.state.students = tem;
   }
 
   @action handleAdd =() =>{
-    let value = this.state.hello.name.trim();
-    this.state.hello.students.push({
+    let value = this.state.name.trim();
+    this.state.students.push({
       name: value || "无名",
       age: parseInt(Math.random()*30),
       id: Math.random()
@@ -21,10 +21,10 @@ export default class HelloAction {
   }
 
   @action handleChange=(event)=>{
-    this.state.hello.name = event.target.value;
+    this.state.name = event.target.value;
   }
 
   @action handleSelectTab=(index)=>{
-    this.state.hello.activeKey = index;
+    this.state.activeKey = index;
   }
 };

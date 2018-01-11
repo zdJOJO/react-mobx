@@ -4,7 +4,6 @@ import { observer, inject } from "mobx-react";
 import "../../style.less";
 import "./index.less";
 import {Tab} from "./tab";
-// import hello from "./hellowStore";
 
 
 const duration = 1000;
