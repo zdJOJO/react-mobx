@@ -1,4 +1,5 @@
 import go from 'gojs';
+import actions from '../../acitons';
 
 let myDiagram;
 let myPalette;
@@ -82,10 +83,19 @@ function init(model) {
     );
   var nodeRotateAdornmentTemplate =
     $(go.Adornment,
-      { locationSpot: go.Spot.Center, locationObjectName: "CIRCLE" },
-      $(go.Shape, "Circle", { name: "CIRCLE", cursor: "pointer", desiredSize: new go.Size(7, 7), fill: "lightblue", stroke: "deepskyblue" }),
+      { locationSpot: go.Spot.Center, background: "transparent", locationObjectName: "CIRCLE" },
+      $(go.Shape, "BpmnActivityLoop", 
+        { 
+          name: "CIRCLE", 
+          cursor: "pointer", 
+          desiredSize: new go.Size(7, 7), 
+          fill: "lightblue", 
+          stroke: "deepskyblue" 
+        }
+      ),
       $(go.Shape, { geometryString: "M3.5 7 L3.5 30", isGeometryPositioned: true, stroke: "deepskyblue", strokeWidth: 1.5, strokeDashArray: [4, 2] })
     );
+
   myDiagram.nodeTemplate =
     $(go.Node, "Spot",
       { locationSpot: go.Spot.Center },
@@ -109,13 +119,14 @@ function init(model) {
           new go.Binding("fill")),
         $(go.TextBlock,
           {
-            font: "bold 11pt Helvetica, Arial, sans-serif",
+            font: "bold 13pt Helvetica, Arial, sans-serif",
             margin: 8,
             maxSize: new go.Size(160, NaN),
             wrap: go.TextBlock.WrapFit,
             editable: true
           },
-          new go.Binding("text").makeTwoWay())
+          new go.Binding("text").makeTwoWay()
+        )
       ),
       // four small named ports, one on each side:
       makePort("T", go.Spot.Top, false, true),
@@ -125,6 +136,9 @@ function init(model) {
       { // handle mouse enter/leave events to show/hide the ports
         mouseEnter: function(e, node) { showSmallPorts(node, true) },
         mouseLeave: function(e, node) { showSmallPorts(node, false) }
+      },
+      { 
+        click: function (e, node) { getNode(node) }
       }
     );
   function showSmallPorts(node, show) {
@@ -152,24 +166,31 @@ function init(model) {
       },
       new go.Binding("points").makeTwoWay(),
       $(go.Shape,  // the link path shape
-        { isPanelMain: true, strokeWidth: 2 }),
+        new go.Binding("stroke", "color"),
+        { isPanelMain: true, strokeWidth: 2 }
+      ),
       $(go.Shape,  // the arrowhead
-        { toArrow: "Standard", stroke: null }),
+        { toArrow: "Standard", stroke: null },
+        new go.Binding("fill", "color"),
+      ),
       $(go.Panel, "Auto",
         new go.Binding("visible", "isSelected").ofObject(),
         $(go.Shape, "RoundedRectangle",  // the link shape
-          { fill: "#F8F8F8", stroke: null }),
+          { fill: "rgba(152, 152, 152, 0.5)", stroke: null }),
         $(go.TextBlock,
           {
             textAlign: "center",
-            font: "12pt helvetica, arial, sans-serif",
-            stroke: "#666",
-            margin: 2,
+            font: "10pt helvetica, arial, sans-serif",
+            stroke: "brown",
+            margin: 1,
             minSize: new go.Size(10, NaN),
             editable: true
           },
           new go.Binding("text").makeTwoWay())
-      )
+      ),
+      { 
+        click: function (e, link) { getLink(link) }
+      }
     );
   load(model);  // load an initial diagram from some JSON text
   
@@ -212,7 +233,8 @@ function init(model) {
           { text: "???", figure: "Diamond", fill: "lightskyblue" },
           { text: "End", figure: "Circle", fill: "#CE0620" },
           { text: "Comment", figure: "RoundedRectangle", fill: "lightyellow" },
-          { text: "Triangle", figure: "Triangle", fill: "#c3c3c3"}
+          { text: "Triangle", figure: "Triangle", fill: "#c3c3c3"},
+          { text: "Ellipse", figure: "Ellipse"}
         ], [
           // the Palette also has a disconnected Link, which the user can drag-and-drop
           { points: new go.List(go.Point).addAll([new go.Point(0, 0), new go.Point(60, 40)]) }
@@ -240,11 +262,11 @@ TopRotatingTool.prototype.rotate = function(newangle) {
 };
 // end of TopRotatingTool class
 // Show the diagram's model in JSON format that the user may edit
-// function save() {
-//   saveDiagramProperties();  // do this first, before writing to JSON
-//   document.getElementById("mySavedModel").value = myDiagram.model.toJson();
-//   myDiagram.isModified = false;
-// }
+function save() {
+  saveDiagramProperties();  // do this first, before writing to JSON
+  myDiagram.isModified = false;
+  return Promise.resolve(myDiagram.model.toJson());
+}
 
 function load(model) {
   if( typeof model === "object"){
@@ -264,4 +286,14 @@ function loadDiagramProperties(e) {
   if (pos) myDiagram.initialPosition = go.Point.parse(pos);
 }
 
-export { init, load };
+/* 获取节点信息 */
+function getNode(node) {
+  actions.graphAction.setSelectNode(node.data);
+}
+
+/* 获取边信息 */
+function getLink(link) {
+  actions.graphAction.setSelectEdge(link.data);
+}
+
+export { init, load, save, getNode };

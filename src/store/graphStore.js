@@ -2,7 +2,12 @@ import { observable } from "mobx";
 
 export default class Graph {
 
-  logicDiagrams = [
+  baseModel = {
+    nodeDataArray: [],
+    linkDataArray: []
+  };
+
+  @observable logicDiagrams = [
     {
       id: 1,
       name: "一个例子",
@@ -13,17 +18,17 @@ export default class Graph {
           {"text":"???", "figure":"Diamond", "fill":"lightskyblue", "key":-4, "loc":"290 270"}
         ],
         linkDataArray: [
-          {"from":-1, "to":-2, "fromPort":"B", "toPort":"T"},
-          {"from":-1, "to":-4, "fromPort":"B", "toPort":"T"}
+          {"from":-1, "to":-2, "fromPort":"B", "toPort":"T", color: "green", text: "测测测测测"},
+          {"from":-1, "to":-4, "fromPort":"B", "toPort":"T", color: "red", text: "隐藏一场"}
         ]
       }
     },
     {
       id: 2,
-      name: "乙二醇逻辑图",
+      name: "例子2：乙二醇逻辑图",
       model: {
         "nodeDataArray": [ 
-          {"text":"原油", "key":-2, "loc":"140 -540", "size":"94 33.875448608398436"},
+          {"text":"原油", "key":-2, "loc":"140 -540", "size":"94 33.875448608398436", fill:"red"},
           {"text":"天然气/页岩气", "key":-3, "loc":"131 -410", "size":"117 33.875448608398436"},
           {"text":"乙烷", "key":-5, "loc":"300 -450"},
           {"text":"甲醇", "key":-6, "loc":"300 -370"},
@@ -47,7 +52,13 @@ export default class Graph {
   ];
 
 
-  @observable selectGraphId
+  @observable selectGraphId = this.logicDiagrams[0].id;
+
+  @observable selectNode;
+
+  @observable selectEdge;
+
+  @observable newGraphName = "";
 
 
 }

@@ -8,12 +8,18 @@
     width: 150px;
     ul{
       padding: 0 10px;
+      height: 530px;
+      overflow-y: scroll;
     }
     li{
       margin: 10px 0;
       padding: 5px 3px;
       list-style: none;
       border: 1px #565454 solid;
+    }
+
+    li.active{
+      background: lightskyblue;
     }
   }
 }
@@ -29,4 +35,10 @@
   height: 600px;
   border: 1px #666 solid;
   flex-grow: 1
+}
+
+.buttons{
+  button{
+    margin: 0 10px; 
+  }
 }
