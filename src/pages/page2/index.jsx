@@ -44,18 +44,38 @@ class Page2 extends Component{
         <div className="box">
           <div className="logicDiagrams">
             <ul>
-              {graph.logicDiagrams.map( logicDiagram =>
-                <li key={logicDiagram.id} className={logicDiagram.id === graph.selectGraphId ? "active" : null }>
-                  <a href="javascript:void(0)" 
-                    onClick={(event)=>{
-                      event.preventDefault();
-                      actions.graphAction.chooseLogicDiagram(logicDiagram);
-                    }}
-                  >
-                    {logicDiagram.name}
-                  </a>
-                </li>
-              )}
+              { graph.logicDiagrams.length > 0 &&
+                graph.logicDiagrams.map( (logicDiagram, index) =>
+                  <li key={logicDiagram.id} className={logicDiagram.id === graph.selectGraphId ? "active" : null }>
+                    <a href="javascript:void(0)" 
+                      onClick={(event)=>{
+                        event.preventDefault();
+                        actions.graphAction.chooseLogicDiagram(logicDiagram);
+                      }}
+                    >
+                      {logicDiagram.name}
+                    </a>
+                    <a
+                      href="javascript:void(0)" 
+                      className="edit-button"
+                      onClick={(event)=>{
+                        event.stopPropagation();
+                        event.preventDefault();
+                        actions.graphAction.editGraphName(index);
+                      }}
+                    >编辑名称</a>
+                    <a
+                      href="javascript:void(0)" 
+                      className="edit-button"
+                      onClick={(event)=>{
+                        event.stopPropagation();
+                        event.preventDefault();
+                        actions.graphAction.removeGraph(index);
+                      }}
+                    >删除</a>
+                  </li>
+                )
+              }
             </ul>
           </div>
           <div id="myPaletteDiv" />

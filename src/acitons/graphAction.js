@@ -40,11 +40,10 @@ export default class GraphAction {
             nodeDataArray: JSON.parse(res).nodeDataArray,
             linkDataArray: JSON.parse(res).linkDataArray
           };
-
+          window.localStorage.setItem("InvestmentGraph", JSON.stringify(this.state.logicDiagrams));
           alert("保存成功");
         }
       });
-      console.log(res);
     });
   }
 
@@ -54,6 +53,18 @@ export default class GraphAction {
 
   @action setSelectEdge = edge => {
     this.state.selectEdge = edge ;
+  }
+
+  /* 删除某一张逻辑图 */
+  @action removeGraph = index => {
+    this.state.logicDiagrams.splice(index, 1);
+    this.saveData();
+  }
+
+  /* 编辑图 名称 */
+  @action editGraphName = index => {
+    let name = window.prompt("请输入名字：") || this.state.logicDiagrams[index].name;
+    this.state.logicDiagrams[index].name = name;
   }
 
   /* 导出 所有逻辑图 */
