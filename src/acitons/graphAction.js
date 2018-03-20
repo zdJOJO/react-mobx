@@ -45,6 +45,8 @@ export default class GraphAction {
         }
       });
     });
+
+    console.log(this.state.logicDiagrams);
   }
 
   @action setSelectNode = node => {

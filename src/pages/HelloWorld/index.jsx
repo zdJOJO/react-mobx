@@ -5,6 +5,8 @@ import "../../style.less";
 import "./index.less";
 import {Tab} from "./tab";
 
+import { Resizable, ResizableBox } from 'react-resizable';
+
 
 const duration = 1000;
 
@@ -53,8 +55,16 @@ const StudentTrans = ({ children, ...props}) => (
 class HelloWorld extends Component{
 
   state = {
-    show: false
+    show: false,
+    width: 20
   }
+
+  handleResize=(event, {element, size})=>{
+    this.setState({
+      width: size.width
+    });
+  }
+
 
   render(){
     const { hello, actions } = this.props;
@@ -97,6 +107,24 @@ class HelloWorld extends Component{
             <button onClick={actions.helloAction.handleAdd}>增加</button>
           </div>
         }
+
+        <div style={{width: 700, display: "flex"}}>
+          <ResizableBox  
+            className="box" 
+            height={200}
+            width={this.state.width}
+            maxConstraints={[680, Infinity]}
+            axis="x" 
+            onResize={this.handleResize}
+          >
+            <div className="box1" style={{width: this.state.width, height: 200}}>
+              <span className="text">{"Raw use of <Resizable> element. 200x200, no constraints."}</span>
+            </div>
+          </ResizableBox >
+          <div className="box2" style={{width: 700 - this.state.width, height: 200}}>
+            <span className="text">{"Raw use of <Resizable> element. 200x200, no constraints."}</span>
+          </div>
+        </div>
       </div>  		
     );
   }
